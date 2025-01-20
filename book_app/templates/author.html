@@ -1,0 +1,11 @@
+<h1>Írót {% if author %} módosít {% else %} hozzáad {% endif %}</h1>
+    
+<form action= {% if author %} "updaterecord/{{ author.id }}" {% else %} "addrecord" {% endif %} method="post">
+    {% csrf_token %}
+    Név: <input name="name" {% if author %} value="{{ author.name }}" {% endif %}>
+    <br>
+    Nő-e: <input type="checkbox" name="is_female" {% if author and author.is_female %} checked {% endif %}>
+    <br>
+
+    <input type="submit" value={% if author %} "Módosít" {% else %} "Hozzáad" {% endif %}>
+</form>

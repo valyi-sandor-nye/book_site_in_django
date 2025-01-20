@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Könyv webapp</title>
+</head>
+<body>
+<h1>Szerzők</h1>
+<table border="1">
+    <tr>
+        <th>Név</th>
+        <th>Nő-e?</th>
+        <th>Módosítás</th>
+        <th>Törlés</th>
+    </tr>
+    {% for author in authors %}
+    <tr>
+        <td>{{author.name}}</td>
+        <td>{% if author.is_female %} nő {% else %} ffi {% endif %} </td>
+        <td><a href="author/update/{{author.id}}">módosít</a>  </td>
+        <td><a href="author/delete/{{author.id}}">töröl</a>  </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+    <p>
+        <a href="author/add/">
+            Szerzőt hozzáad
+        </a>
+    </p>
+<h1>Könyvek</h1>
+
+<table border="1">
+    <tr>
+        <th>Cím</th>
+        <th>Szerző</th>
+        <th>Elérhető?</th>
+        <th>Módosítás</th>
+        <th>Törlés</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{book.title}}</td>
+        <td>{{book.author.name}}</td>
+        <td>{% if book.is_available %} elérh. {% endif %} </td>
+        <td><a href="book/update/{{book.id}}">módosít</a>  </td>
+        <td><a href="book/delete/{{book.id}}">töröl </a> </td>
+    </tr>
+    {% endfor %}
+</table>
+    <p>
+        <a href="book/add/">
+            Könyvet hozzáad
+        </a>
+    </p>
+
+<h1>Female writers (may be empty):</h1>
+<ul>
+    {% for woman in female_authors %}
+    <li>{{woman}}</li>
+    {% endfor %}
+</ul>
+
+
+<h1>Books of female writers (may be empty):</h1>
+<ul>
+    {% for fembook in books_of_female_writers %}
+    <li>{{fembook}}</li>
+    {% endfor %}
+</ul>
+
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<h1>Könyvet {% if book %} módosít {% else %} hozzáad {% endif %}</h1>
+
+<form action= {% if book %} "updaterecord/{{ book.id }}" {% else %} "addrecord" {% endif %} method="post">
+    {% csrf_token %}
+    Cím <input name="title" {% if book %} value="{{title}} " {% endif %}>
+    <br>
+    Elérhető? <input type="checkbox" name="is_available" {% if book and book.is_available %} checked {% endif %}>
+    <br>
+    Szerző:
+    <select name="author_id">
+    {% for author in authors %}
+        <option value="{{ author.id }}"{% if book and book.author_id == author.id %} selected{% endif %}>{{ author.name }}</option>
+    {% endfor %}
+    </select>
+    <br>
+    
+    <input type="submit" value={% if book %} "Módosít" {% else %} "Hozzáad" {% endif %}>
+</form>
